@@ -1,11 +1,5 @@
-import './App.css';
+import Start from "./Start";
 
 export default function App() {
-    return (
-        <div className="Start">
-            <div className="Start-logo">✵</div>
-            <h1 className="Start-text">Implicit Beauty Perception Experiment</h1>
-            <button className="Start-button" onClick={event => event.target.textContent = 'No.'}>Start</button>
-        </div>
-    );
+    return <Start />
 }
