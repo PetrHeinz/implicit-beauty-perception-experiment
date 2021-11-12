@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
+:root {
+    --color-primary: #4b193c;
+    --color-light: #f5f8f0;
+    --color-shadow: rgba(0, 0, 0, 0.25);
+    --shadow-x: 1.5vmin;
+    --shadow-y: 2vmin;
+    --shadow-blur: 1.5vmin;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Start {
+    text-align: center;
+    background-color: var(--color-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-light);
+    text-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
+}
+
+.Start-logo {
+    font-size: 40vmin;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.Start-text {
+    font-size: 7vmin;
+    margin: 5vmin;
+    max-width: 100vmin;
+}
+
+.Start-button {
+    cursor: pointer;
+    font-size: 7vmin;
+    font-weight: bolder;
+    color: var(--color-primary);
+    background-color: var(--color-light);
+    padding: 2vmin;
+    min-width: 40vw;
+    border: none;
+    border-radius: 0.5vmin;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .Start-logo {
+        animation: Start-logo-spin infinite 20s linear;
+    }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes Start-logo-spin {
+    from {
+        transform: rotate(0deg);
+        text-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
+    }
+    25% {
+        text-shadow: var(--shadow-y) calc(-1 * var(--shadow-x)) var(--shadow-blur) var(--color-shadow);
+    }
+    50% {
+        text-shadow: calc(-1 * var(--shadow-x)) calc(-1 * var(--shadow-y)) var(--shadow-blur) var(--color-shadow);
+    }
+    75% {
+        text-shadow: calc(-1 * var(--shadow-y)) var(--shadow-x) var(--shadow-blur) var(--color-shadow);
+    }
+    to {
+        transform: rotate(360deg);
+        text-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
+    }
 }
