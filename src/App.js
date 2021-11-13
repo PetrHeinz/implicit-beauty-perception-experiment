@@ -22,7 +22,7 @@ export default class App extends React.Component {
         return (
             <div className="App">
                 {this.state.page === PAGE_START ? <Start onStart={() => this.changePage(PAGE_SELECT)} /> : null}
-                {this.state.page === PAGE_SELECT ? <Select/> : null}
+                {this.state.page === PAGE_SELECT ? <Select onTimeout={() => this.changePage(PAGE_START)} /> : null}
             </div>
         );
     }

@@ -1,0 +1,16 @@
+.Timer {
+    position: absolute;
+    top: 46vh;
+    left: calc(50vw - 11vh);
+    font-size: 4vh;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 6vh;
+    height: 6vh;
+    width: 20vh;
+    color: var(--color-primary);
+    background-color: var(--color-light);
+    box-shadow: calc(.5 * var(--shadow-x)) calc(.5 * var(--shadow-y)) calc(.5 * var(--shadow-blur)) var(--color-shadow);
+    border: 1vh solid var(--color-primary);
+    border-radius: 5vh;
+}
