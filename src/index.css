@@ -1,3 +1,13 @@
+:root {
+    --color-primary: #4b193c;
+    --color-secondary: #194b41;
+    --color-light: #f5f8f0;
+    --color-shadow: rgba(0, 0, 0, 0.25);
+    --shadow-x: 1.5vmin;
+    --shadow-y: 2vmin;
+    --shadow-blur: 1.5vmin;
+}
+
 body, button {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
