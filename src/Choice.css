@@ -38,8 +38,9 @@
 }
 
 .Choice-photo {
-    height: 36vh;
-    margin: 3vh;
+    height: 5cm;
+    width: 5cm;
+    margin: calc(21vh - 2.5cm);
     float: right;
     border-width: 2vh;
     border-style: solid;
