@@ -5,12 +5,33 @@
     font-size: 4vh;
     font-weight: bolder;
     text-align: center;
-    line-height: 6vh;
-    height: 6vh;
-    width: 20vh;
+    line-height: 8vh;
+    height: 8vh;
+    width: 22vh;
     color: var(--color-primary);
     background-color: var(--color-light);
     box-shadow: calc(.5 * var(--shadow-x)) calc(.5 * var(--shadow-y)) calc(.5 * var(--shadow-blur)) var(--color-shadow);
-    border: 1vh solid var(--color-primary);
     border-radius: 5vh;
+}
+.Timer:before, .Timer:after {
+    content: '';
+    position: absolute;
+    left: -.25vh;
+    height: 3vh;
+    width: 20vh;
+    border: 1.25vh solid var(--color-primary);
+    border-radius: 5vh;
+}
+.Timer:before {
+    top: -.25vh;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-width: 0;
+}
+.Timer:after {
+    bottom: -.25vh;
+    border-color: var(--color-secondary);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-width: 0;
 }
