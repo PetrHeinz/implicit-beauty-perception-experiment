@@ -31,14 +31,14 @@
     margin: .25vh;
     font-size: 1.25vh;
 }
-.Log-INFO {
+.Log-info {
     color: var(--color-primary);
     font-weight: bolder;
 }
-.Log-ERROR {
+.Log-error{
     color: var(--color-secondary);
     font-weight: bolder;
 }
-.Log-DEBUG {
+.Log-debug {
     color: var(--color-secondary);
 }

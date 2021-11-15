@@ -1,6 +1,7 @@
 export default class Logger {
     constructor() {
-        this.records = [];
+        this.records = JSON.parse(window.localStorage.getItem('logger')) || [];
+        this.useLocalStorage = true;
     }
 
     logDebug(message) {
@@ -17,6 +18,18 @@ export default class Logger {
 
     clear() {
         this.records = [];
+        this.save();
+    }
+
+    save() {
+        if (this.useLocalStorage) {
+            try {
+                window.localStorage.setItem('logger', JSON.stringify(this.records));
+            } catch (error) {
+                this.useLocalStorage = false;
+                this.logError("Could not save log to the local storage: " + error);
+            }
+        }
     }
 
     log(type, message) {
@@ -33,5 +46,7 @@ export default class Logger {
         this.records.push(record);
 
         console.log(record.formattedMessage);
+
+        this.save();
     }
 }

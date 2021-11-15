@@ -5,7 +5,7 @@ import { PAGE_START } from "./App";
 export default class Log extends React.Component {
 
     clear() {
-        if (window.confirm("Really clear?")) {
+        if (window.confirm("Do you really want to clear the log?\nYou will irreversibly lose the data.")) {
             this.props.logger.clear();
             this.props.logger.logDebug("Log cleared")
         } else {
@@ -21,7 +21,7 @@ export default class Log extends React.Component {
             <div className="Log">
                 <div className="Log-button Log-clear" onClick={() => this.clear()}>⎚ Clear</div>
                 <div className="Log-button Log-back" onClick={() => this.props.changePage(PAGE_START)}>⤺ Back</div>
-                {records.map(record => <p className={"Log-record Log-" + record.type}>{record.formattedMessage}</p>)}
+                {records.map((record, i) => <p key={i} className={"Log-record Log-" + record.type.toLowerCase()}>{record.formattedMessage}</p>)}
             </div>
         );
     }

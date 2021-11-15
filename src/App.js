@@ -19,8 +19,10 @@ export default class App extends React.Component {
             page: PAGE_START,
         };
         this.logger = new Logger();
+    }
 
-        this.logger.logDebug("Application initialized");
+    componentDidMount() {
+        this.logger.logInfo("Application initialized");
 
         const date = new Date();
         this.logger.logDebug("Current date: " + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay());
@@ -49,6 +51,8 @@ export default class App extends React.Component {
         if (this.state.page === PAGE_LOG) {
             return <Log changePage={(page) => this.changePage(page)} logger={this.logger}/>;
         }
+
+        this.logger.logError("Page '" + this.state.page + "' not found");
 
         return <h1>404 Not Found</h1>;
     }
