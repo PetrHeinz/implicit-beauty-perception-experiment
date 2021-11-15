@@ -1,4 +1,4 @@
-import './Start.css';
+import './Select.css';
 import React from "react";
 import seedrandom from "seedrandom";
 import { PAGE_START } from "./App";
@@ -75,6 +75,7 @@ export default class Select extends React.Component {
                         onConfirm={choice => this.confirm(choice)}
                 />
                 <Timer seconds={this.props.timoutAfterSeconds} tick={10} changePage={this.props.changePage}/>
+                {this.state.selected !== null && <div className={"Select-flash Choice-" + this.state.selected}/>}
             </div>
         );
     }

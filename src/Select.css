@@ -1,1 +1,16 @@
+.Select-flash {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    animation: Select-flash 350ms cubic-bezier(1, 0, 1, 1);
+}
 
+@keyframes Select-flash {
+    from {
+        opacity: 1;
+    }
+}
