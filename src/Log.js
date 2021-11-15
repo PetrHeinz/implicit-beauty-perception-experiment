@@ -4,6 +4,18 @@ import { PAGE_START } from "./App";
 
 export default class Log extends React.Component {
 
+    componentDidMount() {
+        this.scrollDown();
+    }
+
+    componentDidUpdate() {
+        this.scrollDown();
+    }
+
+    scrollDown() {
+        document.documentElement.scrollTop = document.documentElement.scrollHeight;
+    }
+
     clear() {
         if (window.confirm("Do you really want to clear the log?\nYou will irreversibly lose the data.")) {
             this.props.logger.clear();
@@ -16,7 +28,7 @@ export default class Log extends React.Component {
     }
 
     render() {
-        const records = this.props.logger.records.reverse();
+        const records = this.props.logger.records;
         return (
             <div className="Log">
                 <div className="Log-button Log-clear" onClick={() => this.clear()}>⎚ Clear</div>
