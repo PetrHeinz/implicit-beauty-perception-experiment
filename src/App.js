@@ -1,3 +1,4 @@
+import Logger from "./Logger";
 import Start from "./Start";
 import Select from "./Select";
 import React from "react";
@@ -15,6 +16,13 @@ export default class App extends React.Component {
         this.state = {
             page: PAGE_START,
         };
+        this.logger = new Logger();
+
+        this.logger.logDebug("Application initialized");
+
+        const date = new Date();
+        this.logger.logDebug("Current date: " + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay());
+        this.logger.logDebug("Time zone offset: " + date.getTimezoneOffset());
     }
 
     changePage(page) {
@@ -23,7 +31,7 @@ export default class App extends React.Component {
 
     getPage() {
         if (this.state.page === PAGE_START) {
-            return <Start changePage={(page) => this.changePage(page)}/>;
+            return <Start changePage={(page) => this.changePage(page)} logger={this.logger}/>;
         }
 
         if (this.state.page === PAGE_SELECT) {
@@ -31,6 +39,7 @@ export default class App extends React.Component {
                            timoutSeconds={CHOICE_TIMEOUT_SECONDS}
                            selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
                            changePage={(page) => this.changePage(page)}
+                           logger={this.logger}
             />;
         }
 

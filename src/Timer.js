@@ -27,7 +27,7 @@ export default class Timer extends React.Component {
         const time = this.state.time - TICK_MILLISECONDS;
         this.setState({time: time})
         if (time < 0) {
-            console.log("Timeout")
+            this.props.logger.logInfo("Timeout");
             this.props.changePage(PAGE_START);
         }
     }

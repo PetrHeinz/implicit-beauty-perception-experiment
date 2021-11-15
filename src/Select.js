@@ -22,38 +22,38 @@ export default class Select extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(() => this.setState({isSelectable: true}), this.props.selectableDelaySeconds * 1000);
+        setTimeout(() => {
+            this.setState({isSelectable: true})
+            this.props.logger.logDebug("Choices became selectable");
+        }, this.props.selectableDelaySeconds * 1000);
+
+        this.props.logger.logDebug("Select initialized with seed '" + this.props.seed + "'");
     }
 
     select(choice) {
         if (!this.state.isSelectable) {
-            console.log("Not selectable, cannot select '" + choice + "'");
-            return;
+            return this.props.logger.logError("Not selectable, cannot select '" + choice + "'");
         }
         if (this.state.selected !== null) {
-            console.log("Already selected '" + this.state.selected + "', cannot select '" + choice + "'");
-            return;
+            return this.props.logger.logError("Already selected '" + this.state.selected + "', cannot select '" + choice + "'");
         }
 
-        console.log("Selected '" + choice + "'");
+        this.props.logger.logInfo("Selected '" + choice + "'");
         this.setState({selected: choice});
     }
 
     confirm(choice) {
         if (this.state.confirmed) {
-            console.log("Already confirmed '" + this.state.selected + "', cannot confirm '" + choice + "'");
-            return;
+            return this.props.logger.logError("Already confirmed '" + this.state.selected + "', cannot confirm '" + choice + "'");
         }
         if (this.state.selected === null) {
-            console.log("Nothing selected, cannot confirm '" + choice + "'");
-            return;
+            return this.props.logger.logError("Nothing selected, cannot confirm '" + choice + "'");
         }
         if (this.state.selected !== choice) {
-            console.log("Selected '" + this.state.selected + "', cannot confirm '" + choice + "'");
-            return;
+            return this.props.logger.logError("Selected '" + this.state.selected + "', cannot confirm '" + choice + "'");
         }
 
-        console.log("Confirmed '" + choice + "'");
+        this.props.logger.logInfo("Confirmed '" + choice + "'");
         this.setState({confirmed: true});
 
         this.props.changePage(PAGE_START);
@@ -67,14 +67,16 @@ export default class Select extends React.Component {
                         isSelectable={this.state.isSelectable}
                         onSelect={choice => this.select(choice)}
                         onConfirm={choice => this.confirm(choice)}
+                        logger={this.props.logger}
                 />
                 <Choice name="B"
                         seed={this.seedB}
                         isSelectable={this.state.isSelectable}
                         onSelect={choice => this.select(choice)}
                         onConfirm={choice => this.confirm(choice)}
+                        logger={this.props.logger}
                 />
-                <Timer seconds={this.props.timoutSeconds} changePage={this.props.changePage}/>
+                <Timer seconds={this.props.timoutSeconds} changePage={this.props.changePage} logger={this.props.logger}/>
                 {this.state.selected !== null && <div className={"Select-flash Choice-" + this.state.selected}/>}
             </div>
         );

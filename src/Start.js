@@ -3,9 +3,9 @@ import { PAGE_SELECT } from "./App";
 
 export default function Start(props) {
     function onStart() {
-        console.log("Started");
-        console.log("Inner window " + window.innerWidth + "px × " + window.innerHeight + "px")
-        console.log("Outer window " + window.outerWidth + "px × " + window.outerHeight + "px")
+        props.logger.logInfo("Started");
+        props.logger.logDebug("Inner window " + window.innerWidth + "px × " + window.innerHeight + "px");
+        props.logger.logDebug("Outer window " + window.outerWidth + "px × " + window.outerHeight + "px");
         props.changePage(PAGE_SELECT);
     }
 
