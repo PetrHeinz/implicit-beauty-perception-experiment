@@ -1,5 +1,6 @@
 import './Start.css';
 import React from "react";
+import seedrandom from "seedrandom";
 import Choice from "./Choice";
 import Timer from "./Timer";
 
@@ -12,6 +13,10 @@ export default class Select extends React.Component {
             selected: null,
             confirmed: false,
         };
+
+        const rng = seedrandom(props.seed);
+        this.seedA = rng();
+        this.seedB = rng();
     }
 
     select(choice) {
@@ -45,8 +50,16 @@ export default class Select extends React.Component {
     render() {
         return (
             <div className="Select">
-                <Choice onSelect={choice => this.select(choice)} onConfirm={choice => this.confirm(choice)} name="A"/>
-                <Choice onSelect={choice => this.select(choice)} onConfirm={choice => this.confirm(choice)} name="B"/>
+                <Choice name="A"
+                        seed={this.seedA}
+                        onSelect={choice => this.select(choice)}
+                        onConfirm={choice => this.confirm(choice)}
+                />
+                <Choice name="B"
+                        seed={this.seedB}
+                        onSelect={choice => this.select(choice)}
+                        onConfirm={choice => this.confirm(choice)}
+                />
                 <Timer seconds={5} tick={10} onTimeout={this.props.onTimeout}/>
             </div>
         );

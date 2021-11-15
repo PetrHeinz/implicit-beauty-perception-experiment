@@ -18,11 +18,22 @@ export default class App extends React.Component {
         this.setState({page: page});
     }
 
+    getPage() {
+        if (this.state.page === PAGE_START) {
+            return <Start onStart={() => this.changePage(PAGE_SELECT)}/>;
+        }
+
+        if (this.state.page === PAGE_SELECT) {
+            return <Select seed={Math.random()} onTimeout={() => this.changePage(PAGE_START)}/>;
+        }
+
+        return <h1>404 Not Found</h1>
+    }
+
     render() {
         return (
             <div className="App">
-                {this.state.page === PAGE_START ? <Start onStart={() => this.changePage(PAGE_SELECT)} /> : null}
-                {this.state.page === PAGE_SELECT ? <Select onTimeout={() => this.changePage(PAGE_START)} /> : null}
+                {this.getPage()}
             </div>
         );
     }
