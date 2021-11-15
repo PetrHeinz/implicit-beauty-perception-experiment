@@ -6,7 +6,7 @@ export default function Choice(props) {
     const rng = seedrandom(props.seed);
 
     return (
-        <div className={"Choice Choice-" + props.name}>
+        <div className={"Choice Choice-" + props.name + " " + (props.isSelectable ? "Choice-selectable" : "")}>
             <div className="Choice-border">
                 <img className="Choice-photo"
                      onClick={() => props.onConfirm(props.name)}

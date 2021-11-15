@@ -1,5 +1,9 @@
 .Choice {
     position: relative;
+    pointer-events: none;
+}
+.Choice-selectable {
+    pointer-events: auto;
 }
 
 .Choice-A {
