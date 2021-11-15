@@ -38,6 +38,7 @@
 }
 
 .Choice-photo {
+    cursor: pointer;
     height: 5cm;
     width: 5cm;
     margin: calc(21vh - 2.5cm);
@@ -46,6 +47,10 @@
     border-style: solid;
     border-radius: 1vh;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
+    transition: transform 100ms ease-in-out;
+}
+.Choice-photo:hover {
+    transform: scale(1.1);
 }
 
 .Choice-button {
@@ -60,14 +65,10 @@
     border-style: solid;
     border-radius: 5.5vh;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
-    transition: all 200ms ease-in-out;
+    transition: transform 100ms ease-in-out;
 }
 .Choice-button:hover {
-    font-size: 5vh;
-    padding: 1.25vh 2.5vw;
-    margin: -1.25vh -1.25vw;
-    border-width: 1.5vh;
-    box-shadow: calc(1.5 * var(--shadow-x)) calc(1.5 * var(--shadow-y)) calc(1.5 * var(--shadow-blur)) var(--color-shadow);
+    transform: scale(1.1);
 }
 .Choice-A .Choice-button {
     color: var(--color-primary);

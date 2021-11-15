@@ -33,15 +33,10 @@
     border: none;
     border-radius: 1vmin;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
-    transition: all 200ms ease-in-out;
+    transition: transform 200ms ease-in-out;
 }
 .Start-button:hover {
-    font-size: 8vmin;
-    padding: 2.5vmin;
-    min-width: 50vw;
-    margin: -1vmin;
-    border-radius: 1.25vmin;
-    box-shadow: calc(1.5 * var(--shadow-x)) calc(1.5 * var(--shadow-y)) calc(1.5 * var(--shadow-blur)) var(--color-shadow);
+    transform: scale(1.25);
 }
 
 
