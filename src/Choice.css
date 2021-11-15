@@ -66,6 +66,7 @@
     border-radius: 5.5vh;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
     transition: transform 100ms ease-in-out;
+    animation: Choice-button-appear 150ms ease-out;
 }
 .Choice-button:hover {
     transform: scale(1.1);
@@ -77,4 +78,16 @@
 .Choice-B .Choice-button {
     color: var(--color-secondary);
     border-color: var(--color-secondary);
+}
+
+@keyframes Choice-button-appear {
+    from {
+        transform: scale(0);
+    }
+    80% {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1);
+    }
 }

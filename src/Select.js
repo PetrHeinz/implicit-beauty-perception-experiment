@@ -12,7 +12,8 @@ export default class Select extends React.Component {
 
         this.state = {
             selected: null,
-            confirmed: false,
+            isSelectable: false,
+            isConfirmed: false,
         };
 
         const rng = seedrandom(props.seed);
@@ -20,7 +21,15 @@ export default class Select extends React.Component {
         this.seedB = rng();
     }
 
+    componentDidMount() {
+        setTimeout(() => this.setState({isSelectable: true}), this.props.isSelectableAfterMs);
+    }
+
     select(choice) {
+        if (!this.state.isSelectable) {
+            console.log("Not selectable, cannot select '" + choice + "'");
+            return;
+        }
         if (this.state.selected !== null) {
             console.log("Already selected '" + this.state.selected + "', cannot select '" + choice + "'");
             return;
@@ -55,15 +64,17 @@ export default class Select extends React.Component {
             <div className="Select">
                 <Choice name="A"
                         seed={this.seedA}
+                        isSelectable={this.state.isSelectable}
                         onSelect={choice => this.select(choice)}
                         onConfirm={choice => this.confirm(choice)}
                 />
                 <Choice name="B"
                         seed={this.seedB}
+                        isSelectable={this.state.isSelectable}
                         onSelect={choice => this.select(choice)}
                         onConfirm={choice => this.confirm(choice)}
                 />
-                <Timer seconds={5} tick={10} changePage={this.props.changePage}/>
+                <Timer seconds={this.props.timoutAfterSeconds} tick={10} changePage={this.props.changePage}/>
             </div>
         );
     }

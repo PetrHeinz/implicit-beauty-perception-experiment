@@ -24,10 +24,14 @@ export default class App extends React.Component {
         }
 
         if (this.state.page === PAGE_SELECT) {
-            return <Select seed={Math.random()} changePage={(page) => this.changePage(page)}/>;
+            return <Select seed={Math.random()}
+                           timoutAfterSeconds="15"
+                           isSelectableAfterMs="1500"
+                           changePage={(page) => this.changePage(page)}
+            />;
         }
 
-        return <h1>404 Not Found</h1>
+        return <h1>404 Not Found</h1>;
     }
 
     render() {

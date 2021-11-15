@@ -14,7 +14,7 @@ export default function Choice(props) {
                      alt={"Photo " + props.name}
                 />
                 <div className="Choice-name">{props.name}</div>
-                <ChoiceButton onClick={() => props.onSelect(props.name)} x={rng()} y={rng()}/>
+                {props.isSelectable && <ChoiceButton onClick={() => props.onSelect(props.name)} x={rng()} y={rng()}/>}
             </div>
         </div>
     );
