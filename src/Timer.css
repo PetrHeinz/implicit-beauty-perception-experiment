@@ -1,7 +1,7 @@
 .Timer {
     position: absolute;
     top: 46vh;
-    left: calc(50vw - 11vh);
+    left: calc(25vw - 11vh);
     font-size: 4vh;
     font-weight: bolder;
     text-align: center;
