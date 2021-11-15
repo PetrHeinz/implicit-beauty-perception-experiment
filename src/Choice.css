@@ -52,6 +52,7 @@
     border-radius: 1vh;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
     transition: transform 100ms ease-in-out;
+    -webkit-user-drag: none;
 }
 .Choice-photo:hover {
     transform: scale(1.1);
