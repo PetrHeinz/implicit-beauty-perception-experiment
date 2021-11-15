@@ -1,0 +1,44 @@
+.Log {
+    margin: 2.5vh 2.5vw;
+}
+
+.Log-button {
+    display: inline-block;
+    cursor: pointer;
+    position: fixed;
+    right: 0;
+    font-size: 5vh;
+    color: var(--color-primary);
+    margin: 2vmin 4vmin;
+    transition: transform var(--start-hover-transition-delay) ease-in-out;
+}
+.Log-button:hover {
+    transform: scale(1.25);
+}
+.Log-back {
+    font-weight: bolder;
+    bottom: 0;
+    color: var(--color-primary);
+}
+.Log-clear {
+    top: 0;
+    color: var(--color-secondary);
+}
+
+.Log-record {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    user-select: text;
+    margin: .25vh;
+    font-size: 1.25vh;
+}
+.Log-INFO {
+    color: var(--color-primary);
+    font-weight: bolder;
+}
+.Log-ERROR {
+    color: var(--color-secondary);
+    font-weight: bolder;
+}
+.Log-DEBUG {
+    color: var(--color-secondary);
+}

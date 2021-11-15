@@ -39,6 +39,20 @@
     transform: scale(1.25);
 }
 
+.Start-log {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 5vmin;
+    font-weight: bolder;
+    margin: 2vmin;
+    transition: transform var(--start-hover-transition-delay) ease-in-out;
+}
+.Start-log:hover {
+    transform: scale(1.25);
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
     .Start-logo {

@@ -1,4 +1,8 @@
 export default class Logger {
+    constructor() {
+        this.records = [];
+    }
+
     logDebug(message) {
         this.log('DEBUG', message);
     }
@@ -11,12 +15,23 @@ export default class Logger {
         this.log('ERROR', message);
     }
 
-    log(type, message) {
-        console.log(this.time() + " " + type + ": " + message);
+    clear() {
+        this.records = [];
     }
 
-    time() {
+    log(type, message) {
         const date = new Date();
-        return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()  + "." + date.getMilliseconds();
+        const formattedTime = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "." + date.getMilliseconds();
+        const record = {
+            date: date,
+            type: type,
+            message: message,
+            formattedTime: formattedTime,
+            formattedMessage: formattedTime + " " + type + ": " + message,
+        };
+
+        this.records.push(record);
+
+        console.log(record.formattedMessage);
     }
 }

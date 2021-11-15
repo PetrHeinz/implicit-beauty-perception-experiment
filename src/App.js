@@ -1,3 +1,4 @@
+import Log from "./Log";
 import Logger from "./Logger";
 import Start from "./Start";
 import Select from "./Select";
@@ -5,6 +6,7 @@ import React from "react";
 
 export const PAGE_START = 'start';
 export const PAGE_SELECT = 'select';
+export const PAGE_LOG = 'log';
 
 const CHOICE_TIMEOUT_SECONDS = 5;
 const CHOICE_SELECTABLE_DELAY_SECONDS = 1.5;
@@ -26,6 +28,7 @@ export default class App extends React.Component {
     }
 
     changePage(page) {
+        this.logger.logDebug("Changing page to '" + page + "'");
         this.setState({page: page});
     }
 
@@ -41,6 +44,10 @@ export default class App extends React.Component {
                            changePage={(page) => this.changePage(page)}
                            logger={this.logger}
             />;
+        }
+
+        if (this.state.page === PAGE_LOG) {
+            return <Log changePage={(page) => this.changePage(page)} logger={this.logger}/>;
         }
 
         return <h1>404 Not Found</h1>;

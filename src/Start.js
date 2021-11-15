@@ -1,5 +1,5 @@
 import './Start.css';
-import { PAGE_SELECT } from "./App";
+import { PAGE_LOG, PAGE_SELECT } from "./App";
 
 export default function Start(props) {
     function onStart() {
@@ -14,6 +14,7 @@ export default function Start(props) {
             <div className="Start-logo">✵</div>
             <h1 className="Start-text">Implicit Beauty Perception Experiment</h1>
             <button className="Start-button" onClick={onStart}>Start</button>
+            <div className="Start-log" onClick={() => props.changePage(PAGE_LOG)}>☰</div>
         </div>
     );
 }
