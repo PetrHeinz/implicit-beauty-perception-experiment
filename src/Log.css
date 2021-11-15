@@ -9,7 +9,7 @@
     right: 0;
     font-size: 5vh;
     color: var(--color-primary);
-    margin: 2vmin 4vmin;
+    padding: 2vmin 4vmin;
     transition: transform var(--start-hover-transition-delay) ease-in-out;
 }
 .Log-button:hover {
@@ -28,8 +28,9 @@
 .Log-record {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
     user-select: text;
-    padding: .25vh;
     font-size: 1.25vh;
+    line-height: 1.5;
+    margin: 0;
 }
 .Log-info {
     color: var(--color-primary);
