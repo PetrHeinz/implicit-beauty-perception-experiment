@@ -47,3 +47,33 @@
     border-radius: 1vh;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
 }
+
+.Choice-button {
+    cursor: pointer;
+    position: absolute;
+    font-size: 4vh;
+    font-weight: bolder;
+    text-align: center;
+    padding: 1vh 2vw;
+    background-color: var(--color-light);
+    border-width: 1.25vh;
+    border-style: solid;
+    border-radius: 5.5vh;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
+    transition: all 200ms ease-in-out;
+}
+.Choice-button:hover {
+    font-size: 5vh;
+    padding: 1.25vh 2.5vw;
+    margin: -1.25vh -1.25vw;
+    border-width: 1.5vh;
+    box-shadow: calc(1.5 * var(--shadow-x)) calc(1.5 * var(--shadow-y)) calc(1.5 * var(--shadow-blur)) var(--color-shadow);
+}
+.Choice-A .Choice-button {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+.Choice-B .Choice-button {
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
