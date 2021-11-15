@@ -2,6 +2,8 @@ import React from "react";
 import './Timer.css';
 import { PAGE_START } from "./App";
 
+const TICK_MILLISECONDS = 10;
+
 export default class Timer extends React.Component {
     constructor(props) {
         super(props);
@@ -13,7 +15,7 @@ export default class Timer extends React.Component {
     }
 
     componentDidMount() {
-        this.tickInterval = setInterval(() => this.tick(), this.props.tick)
+        this.tickInterval = setInterval(() => this.tick(), TICK_MILLISECONDS)
     }
 
     componentWillUnmount() {
@@ -22,9 +24,10 @@ export default class Timer extends React.Component {
     }
 
     tick() {
-        const time = this.state.time - this.props.tick;
+        const time = this.state.time - TICK_MILLISECONDS;
         this.setState({time: time})
         if (time < 0) {
+            console.log("Timeout")
             this.props.changePage(PAGE_START);
         }
     }

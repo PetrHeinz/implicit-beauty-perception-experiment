@@ -5,6 +5,9 @@ import React from "react";
 export const PAGE_START = 'start';
 export const PAGE_SELECT = 'select';
 
+const CHOICE_TIMEOUT_SECONDS = 5;
+const CHOICE_SELECTABLE_DELAY_SECONDS = 1.5;
+
 export default class App extends React.Component {
 
     constructor(props) {
@@ -25,8 +28,8 @@ export default class App extends React.Component {
 
         if (this.state.page === PAGE_SELECT) {
             return <Select seed={Math.random()}
-                           timoutAfterSeconds="5"
-                           isSelectableAfterMs="1500"
+                           timoutSeconds={CHOICE_TIMEOUT_SECONDS}
+                           selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
                            changePage={(page) => this.changePage(page)}
             />;
         }

@@ -33,7 +33,7 @@
     border: none;
     border-radius: 1vmin;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
-    transition: transform 200ms ease-in-out;
+    transition: transform var(--start-hover-transition-delay) ease-in-out;
 }
 .Start-button:hover {
     transform: scale(1.25);

@@ -6,6 +6,10 @@
     --shadow-x: 1.5vmin;
     --shadow-y: 2vmin;
     --shadow-blur: 1.5vmin;
+    --start-hover-transition-delay: 200ms;
+    --choice-hover-transition-delay: 100ms;
+    --choice-selectable-transition-delay: 150ms;
+    --select-flash-transition-delay: 350ms;
 }
 
 body, button {

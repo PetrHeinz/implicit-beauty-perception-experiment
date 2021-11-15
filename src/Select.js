@@ -22,7 +22,7 @@ export default class Select extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(() => this.setState({isSelectable: true}), this.props.isSelectableAfterMs);
+        setTimeout(() => this.setState({isSelectable: true}), this.props.selectableDelaySeconds * 1000);
     }
 
     select(choice) {
@@ -74,7 +74,7 @@ export default class Select extends React.Component {
                         onSelect={choice => this.select(choice)}
                         onConfirm={choice => this.confirm(choice)}
                 />
-                <Timer seconds={this.props.timoutAfterSeconds} tick={10} changePage={this.props.changePage}/>
+                <Timer seconds={this.props.timoutSeconds} changePage={this.props.changePage}/>
                 {this.state.selected !== null && <div className={"Select-flash Choice-" + this.state.selected}/>}
             </div>
         );
