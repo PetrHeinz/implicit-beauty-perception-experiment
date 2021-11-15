@@ -2,8 +2,8 @@ import Start from "./Start";
 import Select from "./Select";
 import React from "react";
 
-const PAGE_START = 'start';
-const PAGE_SELECT = 'select';
+export const PAGE_START = 'start';
+export const PAGE_SELECT = 'select';
 
 export default class App extends React.Component {
 
@@ -20,11 +20,11 @@ export default class App extends React.Component {
 
     getPage() {
         if (this.state.page === PAGE_START) {
-            return <Start onStart={() => this.changePage(PAGE_SELECT)}/>;
+            return <Start changePage={(page) => this.changePage(page)}/>;
         }
 
         if (this.state.page === PAGE_SELECT) {
-            return <Select seed={Math.random()} onTimeout={() => this.changePage(PAGE_START)}/>;
+            return <Select seed={Math.random()} changePage={(page) => this.changePage(page)}/>;
         }
 
         return <h1>404 Not Found</h1>

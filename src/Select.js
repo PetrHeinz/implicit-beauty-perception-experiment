@@ -1,6 +1,7 @@
 import './Start.css';
 import React from "react";
 import seedrandom from "seedrandom";
+import { PAGE_START } from "./App";
 import Choice from "./Choice";
 import Timer from "./Timer";
 
@@ -45,6 +46,8 @@ export default class Select extends React.Component {
 
         console.log("Confirmed '" + choice + "'");
         this.setState({confirmed: true});
+
+        this.props.changePage(PAGE_START);
     }
 
     render() {
@@ -60,7 +63,7 @@ export default class Select extends React.Component {
                         onSelect={choice => this.select(choice)}
                         onConfirm={choice => this.confirm(choice)}
                 />
-                <Timer seconds={5} tick={10} onTimeout={this.props.onTimeout}/>
+                <Timer seconds={5} tick={10} changePage={this.props.changePage}/>
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import React from "react";
 import './Timer.css';
+import { PAGE_START } from "./App";
 
 export default class Timer extends React.Component {
     constructor(props) {
@@ -24,7 +25,7 @@ export default class Timer extends React.Component {
         const time = this.state.time - this.props.tick;
         this.setState({time: time})
         if (time < 0) {
-            this.props.onTimeout();
+            this.props.changePage(PAGE_START);
         }
     }
 
