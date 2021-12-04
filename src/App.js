@@ -41,6 +41,7 @@ export default class App extends React.Component {
 
         if (this.state.page === PAGE_SELECT) {
             return <Select seed={Math.random()}
+                           index="1"
                            timoutSeconds={CHOICE_TIMEOUT_SECONDS}
                            selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
                            changePage={(page) => this.changePage(page)}

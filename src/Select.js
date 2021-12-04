@@ -63,6 +63,7 @@ export default class Select extends React.Component {
         return (
             <div className="Select">
                 <Choice name="A"
+                        index={this.props.index}
                         seed={this.seedA}
                         isSelectable={this.state.isSelectable}
                         onSelect={choice => this.select(choice)}
@@ -70,6 +71,7 @@ export default class Select extends React.Component {
                         logger={this.props.logger}
                 />
                 <Choice name="B"
+                        index={this.props.index}
                         seed={this.seedB}
                         isSelectable={this.state.isSelectable}
                         onSelect={choice => this.select(choice)}

@@ -50,6 +50,7 @@
     width: 5cm;
     margin: calc(21vh - 2.5cm);
     float: right;
+    text-align: center;
     border-width: 2vh;
     border-style: solid;
     border-radius: 1vh;
@@ -59,6 +60,10 @@
 }
 .Choice-photo:hover {
     transform: scale(1.1);
+}
+.Choice-photo > img {
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .Choice-button {
