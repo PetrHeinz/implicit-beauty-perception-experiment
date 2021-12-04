@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import seedrandom from "seedrandom";
+import { PAGE_START } from "./App";
 import Select from "./Select";
 
-export default function SelectSequence({indexes, seed, selectableDelaySeconds, timoutSeconds, logger}) {
+export default function SelectSequence({indexes, seed, selectableDelaySeconds, timoutSeconds, changePage, logger}) {
 
     const [step, setStep] = useState(0);
 
@@ -15,7 +16,11 @@ export default function SelectSequence({indexes, seed, selectableDelaySeconds, t
     );
 
     const nextStep = () => {
-        setStep(step + 1);
+        if (step + 1 < indexes.length) {
+            setStep(step + 1);
+        } else {
+            changePage(PAGE_START);
+        }
     };
 
     return (
