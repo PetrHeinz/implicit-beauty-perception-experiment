@@ -1,42 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './Timer.css';
-import { PAGE_START } from "./App";
 
 const TICK_MILLISECONDS = 10;
+const MILLISECONDS_IN_SECOND = 1000;
 
-export default class Timer extends React.Component {
-    constructor(props) {
-        super(props);
+export default function Timer({index, seconds, onTimeout, logger}) {
 
-        this.state = {
-            time: props.seconds * 1000,
+    const [time, setTime] = useState(seconds * MILLISECONDS_IN_SECOND);
+
+    useEffect(() => {
+        let interval = null;
+
+        if (time > 0) {
+            interval = setInterval(() => setTime(time - TICK_MILLISECONDS), TICK_MILLISECONDS)
+        } else {
+            logger.logInfo("Timeout");
+            onTimeout();
+            clearInterval(interval);
+            setTime(seconds * MILLISECONDS_IN_SECOND)
         }
-        this.tickInterval = null;
-    }
 
-    componentDidMount() {
-        this.tickInterval = setInterval(() => this.tick(), TICK_MILLISECONDS)
-    }
+        return () => clearInterval(interval);
+    }, [time, seconds, onTimeout, logger])
 
-    componentWillUnmount() {
-        clearInterval(this.tickInterval)
-        this.setState({time: this.props.seconds * 1000})
-    }
+    useEffect(() => setTime(seconds * MILLISECONDS_IN_SECOND), [index, seconds]);
 
-    tick() {
-        const time = this.state.time - TICK_MILLISECONDS;
-        this.setState({time: time})
-        if (time < 0) {
-            this.props.logger.logInfo("Timeout");
-            this.props.changePage(PAGE_START);
-        }
-    }
-
-    render() {
-        return (
-            <div className="Timer">
-                {(this.state.time / 1000).toFixed(2)} s
-            </div>
-        );
-    }
+    return (
+        <div className="Timer">
+            {(time / MILLISECONDS_IN_SECOND).toFixed(2)} s
+        </div>
+    );
 }

@@ -1,34 +1,30 @@
 import './Choice.css';
-import React from "react";
+import React, { useEffect } from "react";
 import seedrandom from "seedrandom";
 import ChoiceButton from "./ChoiceButton";
 
-export default class Choice extends React.Component {
+export default function Choice({index, name, seed, isSelectable, onSelect, onConfirm, logger}) {
 
-    constructor(props) {
-        super(props);
-        const rng = seedrandom(this.props.seed);
-        this.photo = "./photos/T" + this.props.index + this.props.name + ".png";
-        this.x = rng();
-        this.y = rng();
-    }
+    const rng = seedrandom(seed);
+    const photo = "./photos/T" + index + name + ".png";
+    const x = rng();
+    const y = rng();
 
-    componentDidMount() {
-        this.props.logger.logDebug("Choice '" + this.props.name + "' initialized with seed '" + this.props.seed + "'");
-    }
+    useEffect(
+        () => logger.logDebug("Choice '" + name + "' initialized with seed '" + seed + "'"),
+        [logger, name, seed],
+    );
 
-    render() {
-        return (
-            <div
-                className={"Choice Choice-" + this.props.name + " " + (this.props.isSelectable ? "Choice-selectable" : "")}>
-                <div className="Choice-border">
-                    <div className="Choice-photo" onClick={() => this.props.onConfirm(this.props.name)}>
-                        <img src={this.photo} alt={"Photo " + this.props.name} />
-                    </div>
-                    <div className="Choice-name">{this.props.name}</div>
-                    {this.props.isSelectable && <ChoiceButton onClick={() => this.props.onSelect(this.props.name)} x={this.x} y={this.y}/>}
+    return (
+        <div
+            className={"Choice Choice-" + name + " " + (isSelectable ? "Choice-selectable" : "")}>
+            <div className="Choice-border">
+                <div className="Choice-photo" onClick={() => onConfirm(name)}>
+                    <img src={photo} alt={"Photo " + name} />
                 </div>
+                <div className="Choice-name">{name}</div>
+                {isSelectable && <ChoiceButton onClick={() => onSelect(name)} x={x} y={y}/>}
             </div>
-        );
-    }
+        </div>
+    );
 }

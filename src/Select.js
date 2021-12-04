@@ -1,86 +1,88 @@
 import './Select.css';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import seedrandom from "seedrandom";
-import { PAGE_START } from "./App";
 import Choice from "./Choice";
 import Timer from "./Timer";
 
-export default class Select extends React.Component {
+export default function Select({index, seed, selectableDelaySeconds, timoutSeconds, onEnd, logger}) {
 
-    constructor(props) {
-        super(props);
+    const [selected, setSelected] = useState(null);
+    const [isSelectable, setSelectable] = useState(false);
+    const [isConfirmed, setConfirmed] = useState(false);
 
-        this.state = {
-            selected: null,
-            isSelectable: false,
-            isConfirmed: false,
-        };
+    const rng = seedrandom(seed);
+    const seedA = rng();
+    const seedB = rng();
 
-        const rng = seedrandom(props.seed);
-        this.seedA = rng();
-        this.seedB = rng();
-    }
+    useEffect(() => {
+        logger.logDebug("Select " + index + " initialized with seed '" + seed + "'");
+    }, [logger, index, seed]);
 
-    componentDidMount() {
+    useEffect(() => {
         setTimeout(() => {
-            this.setState({isSelectable: true})
-            this.props.logger.logDebug("Choices became selectable");
-        }, this.props.selectableDelaySeconds * 1000);
+            setSelectable(true);
+            logger.logDebug("Choices became selectable");
+        }, selectableDelaySeconds * 1000);
+    }, [index, selectableDelaySeconds, logger]);
 
-        this.props.logger.logDebug("Select initialized with seed '" + this.props.seed + "'");
+    const select = choice => {
+        if (!isSelectable) {
+            return logger.logError("Not selectable, cannot select '" + choice + "'");
+        }
+        if (selected !== null) {
+            return logger.logError("Already selected '" + selected + "', cannot select '" + choice + "'");
+        }
+
+        logger.logInfo("Selected '" + choice + "'");
+        setSelected(choice);
     }
 
-    select(choice) {
-        if (!this.state.isSelectable) {
-            return this.props.logger.logError("Not selectable, cannot select '" + choice + "'");
+    const confirm = choice => {
+        if (isConfirmed) {
+            return logger.logError("Already confirmed '" + selected + "', cannot confirm '" + choice + "'");
         }
-        if (this.state.selected !== null) {
-            return this.props.logger.logError("Already selected '" + this.state.selected + "', cannot select '" + choice + "'");
+        if (selected === null) {
+            return logger.logError("Nothing selected, cannot confirm '" + choice + "'");
+        }
+        if (selected !== choice) {
+            return logger.logError("Selected '" + selected + "', cannot confirm '" + choice + "'");
         }
 
-        this.props.logger.logInfo("Selected '" + choice + "'");
-        this.setState({selected: choice});
+        logger.logInfo("Confirmed '" + choice + "'");
+        setConfirmed(true);
+
+        onEnd();
     }
 
-    confirm(choice) {
-        if (this.state.confirmed) {
-            return this.props.logger.logError("Already confirmed '" + this.state.selected + "', cannot confirm '" + choice + "'");
-        }
-        if (this.state.selected === null) {
-            return this.props.logger.logError("Nothing selected, cannot confirm '" + choice + "'");
-        }
-        if (this.state.selected !== choice) {
-            return this.props.logger.logError("Selected '" + this.state.selected + "', cannot confirm '" + choice + "'");
-        }
+    const parentOnEnd = onEnd;
+    onEnd = () => {
+        setSelected(null);
+        setSelectable(false);
+        setConfirmed(false);
 
-        this.props.logger.logInfo("Confirmed '" + choice + "'");
-        this.setState({confirmed: true});
+        parentOnEnd()
+    };
 
-        this.props.changePage(PAGE_START);
-    }
-
-    render() {
-        return (
-            <div className="Select">
-                <Choice name="A"
-                        index={this.props.index}
-                        seed={this.seedA}
-                        isSelectable={this.state.isSelectable}
-                        onSelect={choice => this.select(choice)}
-                        onConfirm={choice => this.confirm(choice)}
-                        logger={this.props.logger}
-                />
-                <Choice name="B"
-                        index={this.props.index}
-                        seed={this.seedB}
-                        isSelectable={this.state.isSelectable}
-                        onSelect={choice => this.select(choice)}
-                        onConfirm={choice => this.confirm(choice)}
-                        logger={this.props.logger}
-                />
-                <Timer seconds={this.props.timoutSeconds} changePage={this.props.changePage} logger={this.props.logger}/>
-                {this.state.selected !== null && <div className={"Select-flash Choice-" + this.state.selected}/>}
-            </div>
-        );
-    }
+    return (
+        <div className="Select">
+            <Choice index={index}
+                    name="A"
+                    seed={seedA}
+                    isSelectable={isSelectable}
+                    onSelect={choice => select(choice)}
+                    onConfirm={choice => confirm(choice)}
+                    logger={logger}
+            />
+            <Choice index={index}
+                    name="B"
+                    seed={seedB}
+                    isSelectable={isSelectable}
+                    onSelect={choice => select(choice)}
+                    onConfirm={choice => confirm(choice)}
+                    logger={logger}
+            />
+            <Timer index={index} seconds={timoutSeconds} onTimeout={() => onEnd()} logger={logger}/>
+            {selected !== null && <div className={"Select-flash Choice-" + selected}/>}
+        </div>
+    );
 }

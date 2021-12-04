@@ -1,7 +1,7 @@
 import Log from "./Log";
 import Logger from "./Logger";
+import SelectSequence from "./SelectSequence";
 import Start from "./Start";
-import Select from "./Select";
 import React from "react";
 
 export const PAGE_START = 'start';
@@ -40,12 +40,12 @@ export default class App extends React.Component {
         }
 
         if (this.state.page === PAGE_SELECT) {
-            return <Select seed={Math.random()}
-                           index="1"
-                           timoutSeconds={CHOICE_TIMEOUT_SECONDS}
-                           selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
-                           changePage={(page) => this.changePage(page)}
-                           logger={this.logger}
+            return <SelectSequence seed={Math.random()}
+                                   indexes={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
+                                   timoutSeconds={CHOICE_TIMEOUT_SECONDS}
+                                   selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
+                                   changePage={(page) => this.changePage(page)}
+                                   logger={this.logger}
             />;
         }
 
