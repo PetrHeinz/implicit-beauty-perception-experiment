@@ -2,6 +2,7 @@ import './Select.css';
 import React, { useEffect, useState } from "react";
 import seedrandom from "seedrandom";
 import Choice from "./Choice";
+import NullLogger from "./NullLogger";
 import Timer from "./Timer";
 
 export default function Select({index, seed, selectableDelaySeconds, timoutSeconds, onEnd, logger}) {
@@ -9,6 +10,7 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
     const [selected, setSelected] = useState(null);
     const [isSelectable, setSelectable] = useState(false);
     const [isConfirmed, setConfirmed] = useState(false);
+    const [isShowingResult, setShowingResult] = useState(false);
 
     const rng = seedrandom(seed);
     const seedA = rng();
@@ -50,8 +52,7 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
 
         logger.logInfo("Confirmed '" + choice + "'");
         setConfirmed(true);
-
-        onEnd();
+        setShowingResult(true);
     }
 
     const parentOnEnd = onEnd;
@@ -59,9 +60,21 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
         setSelected(null);
         setSelectable(false);
         setConfirmed(false);
+        setShowingResult(false);
 
         parentOnEnd()
     };
+
+    if (isShowingResult) {
+        return (
+            <div className={"Select Result " + (selected !== null ? "Result-" + selected : "") }>
+                {isConfirmed && <Choice index={index} name={selected} isSelectable={false} logger={new NullLogger()}/>}
+                {!isConfirmed && selected !== null && <p>You have not confirmed your choice of {selected}.</p>}
+                {!isConfirmed && selected === null && <p>You have not selected any choice.</p>}
+                <button className="Result-button" onClick={() => onEnd()}>Next</button>
+            </div>
+        );
+    }
 
     return (
         <div className="Select">
@@ -81,7 +94,7 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
                     onConfirm={choice => confirm(choice)}
                     logger={logger}
             />
-            <Timer index={index} seconds={timoutSeconds} onTimeout={() => onEnd()} logger={logger}/>
+            <Timer index={index} seconds={timoutSeconds} onTimeout={() => setShowingResult(true)} logger={logger}/>
             {selected !== null && <div className={"Select-flash Choice-" + selected}/>}
         </div>
     );

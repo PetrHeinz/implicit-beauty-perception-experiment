@@ -9,6 +9,54 @@
     animation: Select-flash var(--select-flash-transition-delay) cubic-bezier(1, 0, 1, 1);
 }
 
+.Result {
+    text-align: center;
+    margin: 10vh 20vh;
+}
+
+.Result .Choice {
+    display: block;
+    width: 50vh;
+    margin: 0 auto;
+    border-radius: 5vh;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
+}
+.Result .Choice-border {
+    box-shadow: none;
+}
+
+.Result p {
+    margin-top: 30vh;
+    font-size: 4vh;
+    font-weight: bolder;
+    text-shadow: calc(.75 * var(--shadow-x)) calc(.75 * var(--shadow-y)) var(--shadow-blur) var(--color-shadow);
+}
+
+.Result-button {
+    cursor: pointer;
+    font-size: 4vh;
+    font-weight: bolder;
+    margin-top: 10vh;
+    padding: 1vh 2vw;
+    background-color: var(--color-light);
+    border-width: 1.25vh;
+    border-style: solid;
+    border-radius: 5.5vh;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
+    transition: transform var(--choice-hover-transition-delay) ease-in-out;
+}
+.Result-button:hover {
+    transform: scale(1.1);
+}
+.Result-A .Result-button {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+.Result-B .Result-button {
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+
 @keyframes Select-flash {
     from {
         opacity: 1;
