@@ -43,7 +43,7 @@ export default class App extends React.Component {
 
         if (this.state.page === PAGE_TUTORIAL) {
             return <Tutorial seed={Math.random()}
-                             timoutSeconds={CHOICE_TIMEOUT_SECONDS}
+                             timeoutSeconds={CHOICE_TIMEOUT_SECONDS}
                              selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
                              onEnd={() => this.changePage(PAGE_SELECT)}
                              onReset={() => this.changePage(PAGE_START)}
@@ -55,7 +55,7 @@ export default class App extends React.Component {
             return <SelectSequence seed={Math.random()}
                                    indexes={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
                                    indexesSwitched={[3, 7, 12]}
-                                   timoutSeconds={CHOICE_TIMEOUT_SECONDS}
+                                   timeoutSeconds={CHOICE_TIMEOUT_SECONDS}
                                    selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
                                    changePage={(page) => this.changePage(page)}
                                    logger={this.logger}

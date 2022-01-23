@@ -5,9 +5,9 @@ import Choice from "./Choice";
 import NullLogger from "./NullLogger";
 import Timer from "./Timer";
 
-export default function Tutorial({seed, selectableDelaySeconds, timoutSeconds, onEnd, onReset, logger}) {
+export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, onEnd, onReset, logger}) {
 
-    const TUTORIAL_TEXT_GOAL = "Podívejte se na fotografie vpravo a rozhodněte, která z fotografií Vám připadá krásnější. Na celé rozhodnutí máte " + timoutSeconds + " vteřin.";
+    const TUTORIAL_TEXT_GOAL = "Podívejte se na fotografie vpravo a rozhodněte, která z fotografií Vám připadá krásnější. Na celé rozhodnutí máte " + timeoutSeconds + " vteřin.";
     const TUTORIAL_TEXT_SELECTION = "Nyní se na obrazovce objevila 2 tlačítka 'Vybrat'. Klikněte na to u Vámi zvolené fotografie. Výběr poté potvrdíte kliknutím na samotnou fotografii.";
 
     const [selected, setSelected] = useState(null);
@@ -110,7 +110,7 @@ export default function Tutorial({seed, selectableDelaySeconds, timoutSeconds, o
             />
             <Timer index={0}
                    running={tutorialText === null}
-                   seconds={timoutSeconds}
+                   seconds={timeoutSeconds}
                    onTimeout={() => setShowingResult(true)}
                    logger={logger}
             />

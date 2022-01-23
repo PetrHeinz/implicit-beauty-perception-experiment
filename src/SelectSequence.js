@@ -4,7 +4,7 @@ import seedrandom from "seedrandom";
 import { PAGE_START } from "./App";
 import Select from "./Select";
 
-export default function SelectSequence({indexes, indexesSwitched, seed, selectableDelaySeconds, timoutSeconds, changePage, logger}) {
+export default function SelectSequence({indexes, indexesSwitched, seed, selectableDelaySeconds, timeoutSeconds, changePage, logger}) {
 
     const [step, setStep] = useState(0);
 
@@ -41,7 +41,7 @@ export default function SelectSequence({indexes, indexesSwitched, seed, selectab
                 shouldSwitch={indexesSwitched.indexOf(indexes[step]) !== -1}
                 seed={seeds[step]}
                 selectableDelaySeconds={selectableDelaySeconds}
-                timoutSeconds={timoutSeconds}
+                timeoutSeconds={timeoutSeconds}
                 onEnd={() => setStep(step + 1)}
                 onReset={() => reset()}
                 logger={logger}

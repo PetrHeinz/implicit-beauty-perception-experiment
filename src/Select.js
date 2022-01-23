@@ -5,7 +5,7 @@ import Choice from "./Choice";
 import NullLogger from "./NullLogger";
 import Timer from "./Timer";
 
-export default function Select({index, shouldSwitch, seed, selectableDelaySeconds, timoutSeconds, onEnd, onReset, logger}) {
+export default function Select({index, shouldSwitch, seed, selectableDelaySeconds, timeoutSeconds, onEnd, onReset, logger}) {
 
     const [selected, setSelected] = useState(null);
     const [isSelectable, setSelectable] = useState(false);
@@ -107,7 +107,7 @@ export default function Select({index, shouldSwitch, seed, selectableDelaySecond
                     onConfirm={choice => confirm(choice)}
                     logger={logger}
             />
-            <Timer index={index} seconds={timoutSeconds} onTimeout={() => setShowingResult(true)} logger={logger}/>
+            <Timer index={index} seconds={timeoutSeconds} onTimeout={() => setShowingResult(true)} logger={logger}/>
             {selected !== null && <div className={"Select-flash Choice-" + selected}/>}
         </div>
     );
