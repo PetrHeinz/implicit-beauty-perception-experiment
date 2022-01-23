@@ -8,6 +8,8 @@ export const PAGE_START = 'start';
 export const PAGE_SELECT = 'select';
 export const PAGE_LOG = 'log';
 
+export const SWITCH_PROBABILITY = 0.15;
+
 const CHOICE_TIMEOUT_SECONDS = 5;
 const CHOICE_SELECTABLE_DELAY_SECONDS = 1.5;
 
