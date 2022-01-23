@@ -1,28 +1,24 @@
 import './Select.css';
 import React, { useEffect, useState } from "react";
 import seedrandom from "seedrandom";
-import { SWITCH_PROBABILITY } from "./App";
 import Choice from "./Choice";
 import NullLogger from "./NullLogger";
 import Timer from "./Timer";
 
-export default function Select({index, seed, selectableDelaySeconds, timoutSeconds, onEnd, onReset, logger}) {
+export default function Select({index, shouldSwitch, seed, selectableDelaySeconds, timoutSeconds, onEnd, onReset, logger}) {
 
     const [selected, setSelected] = useState(null);
     const [isSelectable, setSelectable] = useState(false);
     const [isConfirmed, setConfirmed] = useState(false);
     const [isShowingResult, setShowingResult] = useState(false);
-    const [isSwitched, setSwitched] = useState(false);
 
     const rng = seedrandom(seed);
-    const seedSwitch = seedrandom()();
-    const rngSwitch = seedrandom(seedSwitch);
     const seedA = rng();
     const seedB = rng();
 
     useEffect(() => {
-        logger.logDebug("Select " + index + " initialized with seed '" + seed + "' (seed for switch '" + seedSwitch + "')");
-    }, [logger, index, seed, seedSwitch]);
+        logger.logDebug("Select " + index + " initialized with seed '" + seed + "'" + (shouldSwitch ? " (should switch)" : ""));
+    }, [logger, index, seed, shouldSwitch]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -42,9 +38,8 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
         logger.logInfo("Selected '" + choice + "'");
         setSelected(choice);
 
-        if (rngSwitch() < SWITCH_PROBABILITY) {
+        if (shouldSwitch) {
             logger.logInfo("Switched choices!");
-            setSwitched(true);
         }
     }
 
@@ -56,16 +51,16 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
             return logger.logError("Nothing selected, cannot confirm '" + choice + "'");
         }
         if (selected !== choice) {
-            return logger.logError("Selected '" + selected + "', cannot confirm '" + choice + "'" + (isSwitched ? " (switched)" : ""));
+            return logger.logError("Selected '" + selected + "', cannot confirm '" + choice + "'" + (shouldSwitch ? " (switched)" : ""));
         }
 
-        logger.logInfo("Confirmed '" + choice + "'" + (isSwitched ? " (switched)" : ""));
+        logger.logInfo("Confirmed '" + choice + "'" + (shouldSwitch ? " (switched)" : ""));
         setConfirmed(true);
         setShowingResult(true);
     }
 
     const getPhoto = name => {
-        if (isSwitched) {
+        if (shouldSwitch && selected !== null) {
             name = (name === "A" ? "B" : "A");
         }
 
@@ -78,7 +73,6 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
         setSelectable(false);
         setConfirmed(false);
         setShowingResult(false);
-        setSwitched(false);
 
         parentOnEnd()
     };
