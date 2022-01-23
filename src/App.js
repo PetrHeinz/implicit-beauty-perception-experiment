@@ -54,7 +54,7 @@ export default class App extends React.Component {
         if (this.state.page === PAGE_SELECT) {
             return <SelectSequence seed={Math.random()}
                                    indexes={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
-                                   indexesSwitched={[3, 7, 12]}
+                                   indexesSwitched={[7, 10, 14]}
                                    timeoutSeconds={CHOICE_TIMEOUT_SECONDS}
                                    selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
                                    changePage={(page) => this.changePage(page)}
