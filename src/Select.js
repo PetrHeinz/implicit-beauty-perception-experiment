@@ -87,9 +87,9 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
         return (
             <div className={"Select Result " + (selected !== null ? "Result-" + selected : "") }>
                 {isConfirmed && <Choice photo={getPhoto(selected)} name={selected} isSelectable={false} logger={new NullLogger()}/>}
-                {!isConfirmed && selected !== null && <p>You have not confirmed your choice of {selected}.</p>}
-                {!isConfirmed && selected === null && <p>You have not selected any choice.</p>}
-                <button className="Result-button" onClick={() => onEnd()}>Next</button>
+                {!isConfirmed && selected !== null && <p>Nepotvrdili jste Vámi vybranou možnost {selected}.</p>}
+                {!isConfirmed && selected === null && <p>Nevybrali jste žádnou možnost.</p>}
+                <button className="Result-button" onClick={() => onEnd()}>Další</button>
                 <div className="Result-reset" onClick={() => onReset()}>⤺</div>
             </div>
         );

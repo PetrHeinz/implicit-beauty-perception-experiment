@@ -17,7 +17,7 @@ export default function SelectSequence({indexes, seed, selectableDelaySeconds, t
     );
 
     const reset = () => {
-        if (window.confirm("Do you really want to reset the experiment?")) {
+        if (window.confirm("Vážně chcete restartovat experiment?")) {
             logger.logDebug("Resetting the experiment");
             changePage(PAGE_START);
         } else {
@@ -30,8 +30,8 @@ export default function SelectSequence({indexes, seed, selectableDelaySeconds, t
 
         return (
             <div className="SelectSequence Result">
-                <p>Thank you for your participation!</p>
-                <button className="Result-button" onClick={() => changePage(PAGE_START)}>End</button>
+                <p>Děkujeme za Vaši účast!</p>
+                <button className="Result-button" onClick={() => changePage(PAGE_START)}>Konec</button>
             </div>
         );
     }
