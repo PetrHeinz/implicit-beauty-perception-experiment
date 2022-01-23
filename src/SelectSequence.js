@@ -1,3 +1,4 @@
+import './Select.css';
 import React, { useEffect, useState } from "react";
 import seedrandom from "seedrandom";
 import { PAGE_START } from "./App";
@@ -15,14 +16,6 @@ export default function SelectSequence({indexes, seed, selectableDelaySeconds, t
         [logger, seed],
     );
 
-    const nextStep = () => {
-        if (step + 1 < indexes.length) {
-            setStep(step + 1);
-        } else {
-            changePage(PAGE_START);
-        }
-    };
-
     const reset = () => {
         if (window.confirm("Do you really want to reset the experiment?")) {
             logger.logDebug("Resetting the experiment");
@@ -32,12 +25,23 @@ export default function SelectSequence({indexes, seed, selectableDelaySeconds, t
         }
     };
 
+    if (step >= indexes.length) {
+        logger.logDebug("Select sequence ended");
+
+        return (
+            <div className="SelectSequence Result">
+                <p>Thank you for your participation!</p>
+                <button className="Result-button" onClick={() => changePage(PAGE_START)}>End</button>
+            </div>
+        );
+    }
+
     return (
         <Select index={indexes[step]}
                 seed={seeds[step]}
                 selectableDelaySeconds={selectableDelaySeconds}
                 timoutSeconds={timoutSeconds}
-                onEnd={() => nextStep()}
+                onEnd={() => setStep(step + 1)}
                 onReset={() => reset()}
                 logger={logger}
         />
