@@ -76,6 +76,11 @@ export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, 
         setShowingResult(false);
     };
 
+    const closeTutorial = () => {
+        logger.logDebug("Closing tutorial text");
+        setTutorialText(null);
+    }
+
     if (isShowingResult) {
         return (
             <div className={"Select Result " + (selected !== null ? "Result-" + selected : "") }>
@@ -83,7 +88,6 @@ export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, 
                 {!isConfirmed && selected !== null && <p>Nepotvrdili jste Vámi vybranou možnost {selected}.</p>}
                 {!isConfirmed && selected === null && <p>Nevybrali jste žádnou možnost.</p>}
                 <button className="Result-button" onClick={() => restartTutorial()}>Chci si to ještě zopakovat</button>
-                <br />
                 {isConfirmed && <button className="Result-button" onClick={() => onEnd()}>Jsem připraven/a</button>}
                 <div className="Result-reset" onClick={() => onReset()}>⤺</div>
             </div>
@@ -115,7 +119,7 @@ export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, 
                    logger={logger}
             />
             {selected !== null && <div className={"Select-flash Choice-" + selected}/>}
-            {tutorialText !== null && <div className="Select-tutorial">{tutorialText}<button className="Select-tutorial-button" onClick={() => setTutorialText(null)}>Rozumím</button></div>}
+            {tutorialText !== null && <div className="Select-tutorial">{tutorialText}<button className="Select-tutorial-button" onClick={closeTutorial}>Rozumím</button></div>}
         </div>
     );
 }

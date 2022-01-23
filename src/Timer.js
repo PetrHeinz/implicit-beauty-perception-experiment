@@ -4,30 +4,48 @@ import './Timer.css';
 const TICK_MILLISECONDS = 10;
 const MILLISECONDS_IN_SECOND = 1000;
 
-export default function Timer({index, seconds, onTimeout, logger, running=true}) {
+export default function Timer({index, seconds, onTimeout, logger, running = true}) {
 
     const [time, setTime] = useState(seconds * MILLISECONDS_IN_SECOND);
+    const [lastNow, setLastNow] = useState(running ? Date.now() : null);
 
     useEffect(() => {
-        let interval = null;
-
-        if (!running) {
-            return;
+        if (running && lastNow === null) {
+            setLastNow(Date.now());
         }
 
-        if (time > 0) {
-            interval = setInterval(() => setTime(time - TICK_MILLISECONDS), TICK_MILLISECONDS)
-        } else {
-            logger.logInfo("Timeout");
-            onTimeout();
-            clearInterval(interval);
-            setTime(seconds * MILLISECONDS_IN_SECOND)
-        }
+        const interval = setInterval(() => {
+            if (!running || lastNow === null) {
+                return;
+            }
+
+            const now = Date.now();
+            const elapsedMilliseconds = now - lastNow;
+
+            setTime(t => t - elapsedMilliseconds);
+            setLastNow(now);
+        }, TICK_MILLISECONDS);
 
         return () => clearInterval(interval);
-    }, [time, running, seconds, onTimeout, logger])
+    }, [running, lastNow]);
 
-    useEffect(() => setTime(seconds * MILLISECONDS_IN_SECOND), [index, seconds]);
+    useEffect(() => {
+        if (time <= 0) {
+            logger.logInfo("Timeout");
+            onTimeout();
+
+            setTime(seconds * MILLISECONDS_IN_SECOND);
+            setLastNow(running ? Date.now() : null);
+        }
+    }, [running, time, seconds, onTimeout, logger]);
+
+    useEffect(() => {
+        setTime(seconds * MILLISECONDS_IN_SECOND);
+    }, [index, seconds]);
+
+    useEffect(() => {
+        setLastNow(running ? Date.now() : null);
+    }, [running]);
 
     return (
         <div className="Timer">
