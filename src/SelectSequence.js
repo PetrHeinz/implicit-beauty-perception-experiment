@@ -23,12 +23,22 @@ export default function SelectSequence({indexes, seed, selectableDelaySeconds, t
         }
     };
 
+    const reset = () => {
+        if (window.confirm("Do you really want to reset the experiment?")) {
+            logger.logDebug("Resetting the experiment");
+            changePage(PAGE_START);
+        } else {
+            logger.logDebug("Reset not confirmed, continuing");
+        }
+    };
+
     return (
         <Select index={indexes[step]}
                 seed={seeds[step]}
                 selectableDelaySeconds={selectableDelaySeconds}
                 timoutSeconds={timoutSeconds}
                 onEnd={() => nextStep()}
+                onReset={() => reset()}
                 logger={logger}
         />
     );

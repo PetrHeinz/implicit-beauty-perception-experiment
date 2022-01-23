@@ -48,11 +48,26 @@
 .Result-button:hover {
     transform: scale(1.1);
 }
-.Result-A .Result-button {
+
+.Result-reset {
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 5vmin;
+    font-weight: bolder;
+    margin: 2vmin;
+    transition: transform var(--start-hover-transition-delay) ease-in-out;
+}
+.Result-reset:hover {
+    transform: scale(1.25);
+}
+
+.Result-A .Result-button, .Result-A .Result-reset {
     color: var(--color-primary);
     border-color: var(--color-primary);
 }
-.Result-B .Result-button {
+.Result-B .Result-button, .Result-B .Result-reset {
     color: var(--color-secondary);
     border-color: var(--color-secondary);
 }

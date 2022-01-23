@@ -6,7 +6,7 @@ import Choice from "./Choice";
 import NullLogger from "./NullLogger";
 import Timer from "./Timer";
 
-export default function Select({index, seed, selectableDelaySeconds, timoutSeconds, onEnd, logger}) {
+export default function Select({index, seed, selectableDelaySeconds, timoutSeconds, onEnd, onReset, logger}) {
 
     const [selected, setSelected] = useState(null);
     const [isSelectable, setSelectable] = useState(false);
@@ -90,6 +90,7 @@ export default function Select({index, seed, selectableDelaySeconds, timoutSecon
                 {!isConfirmed && selected !== null && <p>You have not confirmed your choice of {selected}.</p>}
                 {!isConfirmed && selected === null && <p>You have not selected any choice.</p>}
                 <button className="Result-button" onClick={() => onEnd()}>Next</button>
+                <div className="Result-reset" onClick={() => onReset()}>⤺</div>
             </div>
         );
     }
