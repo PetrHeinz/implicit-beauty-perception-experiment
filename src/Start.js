@@ -1,12 +1,12 @@
 import './Start.css';
-import { PAGE_LOG, PAGE_SELECT } from "./App";
+import { PAGE_LOG, PAGE_TUTORIAL } from "./App";
 
 export default function Start(props) {
     function onStart() {
         props.logger.logInfo("Started");
         props.logger.logDebug("Inner window " + window.innerWidth + "px × " + window.innerHeight + "px");
         props.logger.logDebug("Outer window " + window.outerWidth + "px × " + window.outerHeight + "px");
-        props.changePage(PAGE_SELECT);
+        props.changePage(PAGE_TUTORIAL);
     }
 
     return (

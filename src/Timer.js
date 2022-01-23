@@ -4,12 +4,16 @@ import './Timer.css';
 const TICK_MILLISECONDS = 10;
 const MILLISECONDS_IN_SECOND = 1000;
 
-export default function Timer({index, seconds, onTimeout, logger}) {
+export default function Timer({index, seconds, onTimeout, logger, running=true}) {
 
     const [time, setTime] = useState(seconds * MILLISECONDS_IN_SECOND);
 
     useEffect(() => {
         let interval = null;
+
+        if (!running) {
+            return;
+        }
 
         if (time > 0) {
             interval = setInterval(() => setTime(time - TICK_MILLISECONDS), TICK_MILLISECONDS)
@@ -21,7 +25,7 @@ export default function Timer({index, seconds, onTimeout, logger}) {
         }
 
         return () => clearInterval(interval);
-    }, [time, seconds, onTimeout, logger])
+    }, [time, running, seconds, onTimeout, logger])
 
     useEffect(() => setTime(seconds * MILLISECONDS_IN_SECOND), [index, seconds]);
 

@@ -1,7 +1,8 @@
 :root {
     --color-primary: #4b193c;
     --color-secondary: #194b41;
-    --color-light: #f5f8f0;
+    --color-light-rgb: 245, 248, 240;
+    --color-light: rgb(var(--color-light-rgb));
     --color-dark: #161a16;
     --color-shadow: rgba(0, 0, 0, 0.25);
     --shadow-x: 1.5vmin;

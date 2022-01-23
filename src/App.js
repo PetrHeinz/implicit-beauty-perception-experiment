@@ -3,8 +3,10 @@ import Logger from "./Logger";
 import SelectSequence from "./SelectSequence";
 import Start from "./Start";
 import React from "react";
+import Tutorial from "./Tutorial";
 
 export const PAGE_START = 'start';
+export const PAGE_TUTORIAL = 'tutorial';
 export const PAGE_SELECT = 'select';
 export const PAGE_LOG = 'log';
 
@@ -37,6 +39,16 @@ export default class App extends React.Component {
     getPage() {
         if (this.state.page === PAGE_START) {
             return <Start changePage={(page) => this.changePage(page)} logger={this.logger}/>;
+        }
+
+        if (this.state.page === PAGE_TUTORIAL) {
+            return <Tutorial seed={Math.random()}
+                             timoutSeconds={CHOICE_TIMEOUT_SECONDS}
+                             selectableDelaySeconds={CHOICE_SELECTABLE_DELAY_SECONDS}
+                             onEnd={() => this.changePage(PAGE_SELECT)}
+                             onReset={() => this.changePage(PAGE_START)}
+                             logger={this.logger}
+            />;
         }
 
         if (this.state.page === PAGE_SELECT) {
