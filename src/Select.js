@@ -64,7 +64,7 @@ export default function Select({index, shouldSwitch, seed, selectableDelaySecond
             name = (name === "A" ? "B" : "A");
         }
 
-        return "./photos/T" + index + name + ".png";
+        return "./photos/T" + index + name + ".jpg";
     }
 
     const parentOnEnd = onEnd;

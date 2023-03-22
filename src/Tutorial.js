@@ -64,7 +64,7 @@ export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, 
         setShowingResult(true);
     }
 
-    const getPhoto = name => "./photos/T0" + name + ".png";
+    const getPhoto = name => "./photos/T0" + name + ".jpg";
 
     const restartTutorial = () => {
         logger.logDebug("Restarting tutorial");
