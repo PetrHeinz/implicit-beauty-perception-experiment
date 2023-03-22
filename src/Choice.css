@@ -14,7 +14,7 @@
     border-color: var(--color-primary);
     background-color: var(--color-primary);
 }
-.Choice-A .Choice-photo {
+.Choice-A .Choice-photo img {
     background-color: var(--color-primary);
 }
 .Choice-B {
@@ -22,7 +22,7 @@
     border-color: var(--color-secondary);
     background-color: var(--color-secondary);
 }
-.Choice-B .Choice-photo {
+.Choice-B .Choice-photo img {
     background-color: var(--color-secondary);
 }
 
@@ -45,16 +45,13 @@
 }
 
 .Choice-photo {
+    position: relative;
     cursor: pointer;
-    height: 5cm;
-    width: 5cm;
+    height: calc(5cm + 4vh);
+    width: calc(5cm + 4vh);
     margin: calc(21vh - 2.5cm);
     float: right;
     text-align: center;
-    border-width: 2vh;
-    border-style: solid;
-    border-radius: 1vh;
-    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
     transition: transform var(--choice-hover-transition-delay) ease-in-out;
     -webkit-user-drag: none;
 }
@@ -62,8 +59,13 @@
     transform: scale(1.1);
 }
 .Choice-photo > img {
+    box-sizing: border-box;
     max-height: 100%;
     max-width: 100%;
+    border-width: 2vh;
+    border-style: solid;
+    border-radius: 1vh;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
 }
 
 .Choice-button {
