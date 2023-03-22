@@ -10,7 +10,7 @@ export const PAGE_TUTORIAL = 'tutorial';
 export const PAGE_SELECT = 'select';
 export const PAGE_LOG = 'log';
 
-const CHOICE_TIMEOUT_SECONDS = 5;
+const CHOICE_TIMEOUT_SECONDS = 7;
 const CHOICE_SELECTABLE_DELAY_SECONDS = 1.5;
 
 export default class App extends React.Component {
