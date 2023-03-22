@@ -29,7 +29,7 @@
     border-bottom-width: 0;
 }
 .Timer:after {
-    bottom: -.25vh;
+    bottom: calc(-.25vh + 1px);
     border-color: var(--color-secondary);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
