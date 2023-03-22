@@ -71,7 +71,7 @@ export default function Select({index, shouldSwitch, seed, selectableDelaySecond
     onEnd = () => {
         let resultInput = document.querySelector(".Result-input");
         if (resultInput) {
-            logger.logInfo("Reason fo the choice: '" + resultInput.value + "'");
+            logger.logInfo("Reason for the choice: '" + resultInput.value + "'");
         }
         setSelected(null);
         setSelectable(false);
