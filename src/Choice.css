@@ -53,7 +53,6 @@
     float: right;
     text-align: center;
     transition: transform var(--choice-hover-transition-delay) ease-in-out;
-    -webkit-user-drag: none;
 }
 .Choice-photo:hover {
     transform: scale(1.1);

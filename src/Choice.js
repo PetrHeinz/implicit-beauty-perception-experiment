@@ -19,7 +19,7 @@ export default function Choice({name, photo, seed, isSelectable, onSelect, onCon
             className={"Choice Choice-" + name + " " + (isSelectable ? "Choice-selectable" : "")}>
             <div className="Choice-border">
                 <div className="Choice-photo" onClick={() => onConfirm(name)}>
-                    <img src={photo} alt={"Photo " + name} />
+                    <img src={photo} alt={"Photo " + name} draggable={false} />
                 </div>
                 <div className="Choice-name">{name}</div>
                 {isSelectable && <ChoiceButton onClick={() => onSelect(name)} x={x} y={y}/>}
