@@ -70,6 +70,23 @@
     transform: scale(1.1);
 }
 
+.Result-input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 2vh;
+    margin: 2vh auto 0;
+    padding: 1vh 2vw;
+    background-color: var(--color-light);
+    border-width: 1.25vh;
+    border-style: solid;
+    border-radius: 2.5vh;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--color-shadow);
+    transition: transform var(--choice-hover-transition-delay) ease-in-out;
+}
+
 .Result-reset {
     cursor: pointer;
     position: absolute;
@@ -84,11 +101,11 @@
     transform: scale(1.25);
 }
 
-.Result-A .Result-button, .Result-A .Result-reset {
+.Result-A .Result-button, .Result-A .Result-reset, .Result-A .Result-input {
     color: var(--color-primary);
     border-color: var(--color-primary);
 }
-.Result-B .Result-button, .Result-B .Result-reset {
+.Result-B .Result-button, .Result-B .Result-reset, .Result-B .Result-input {
     color: var(--color-secondary);
     border-color: var(--color-secondary);
 }

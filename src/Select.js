@@ -69,6 +69,10 @@ export default function Select({index, shouldSwitch, seed, selectableDelaySecond
 
     const parentOnEnd = onEnd;
     onEnd = () => {
+        let resultInput = document.querySelector(".Result-input");
+        if (resultInput) {
+            logger.logInfo("Reason fo the choice: '" + resultInput.value + "'");
+        }
         setSelected(null);
         setSelectable(false);
         setConfirmed(false);
@@ -80,10 +84,10 @@ export default function Select({index, shouldSwitch, seed, selectableDelaySecond
     if (isShowingResult) {
         return (
             <div className={"Select Result " + (selected !== null ? "Result-" + selected : "") }>
-                {isConfirmed && <Choice photo={getPhoto(selected)} name={selected} isSelectable={false} logger={new NullLogger()}/>}
+                {isConfirmed && <><Choice photo={getPhoto(selected)} name={selected} isSelectable={false} logger={new NullLogger()}/><textarea className="Result-input" rows={3} placeholder={"Nyní krátce vysvětlete proč jste si vybral/-a tuto fotografii"}/></>}
                 {!isConfirmed && selected !== null && <p>Nepotvrdili jste Vámi vybranou možnost {selected}.<br/>Po stisknutí tlačítka 'Vybrat' potvrďte svůj výběr kliknutím na samotnou fotografii.</p>}
                 {!isConfirmed && selected === null && <p>Nevybrali jste žádnou možnost.<br/>Výběr proveďte kliknutím na tlačítko 'Vybrat' u Vámi zvolené fotografie.</p>}
-                <button className="Result-button" onClick={() => onEnd()}>Další</button>
+                <button style={{marginTop: isConfirmed ? "5vh" : ""}} className="Result-button" onClick={() => onEnd()}>Další</button>
                 <div className="Result-reset" onClick={() => onReset()}>⤺</div>
             </div>
         );
