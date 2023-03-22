@@ -85,8 +85,8 @@ export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, 
         return (
             <div className={"Select Result " + (selected !== null ? "Result-" + selected : "") }>
                 {isConfirmed && <Choice photo={getPhoto(selected)} name={selected} isSelectable={false} logger={new NullLogger()}/>}
-                {!isConfirmed && selected !== null && <p>Nepotvrdili jste Vámi vybranou možnost {selected}.</p>}
-                {!isConfirmed && selected === null && <p>Nevybrali jste žádnou možnost.</p>}
+                {!isConfirmed && selected !== null && <p>Nepotvrdili jste Vámi vybranou možnost {selected}.<br/>Po stisknutí tlačítka 'Vybrat' potvrďte svůj výběr kliknutím na samotnou fotografii.</p>}
+                {!isConfirmed && selected === null && <p>Nevybrali jste žádnou možnost.<br/>Výběr proveďte kliknutím na tlačítko 'Vybrat' u Vámi zvolené fotografie.</p>}
                 <button className="Result-button" onClick={() => restartTutorial()}>Chci si to ještě zopakovat</button>
                 {isConfirmed && <button className="Result-button" onClick={() => onEnd()}>Jsem připraven/a</button>}
                 <div className="Result-reset" onClick={() => onReset()}>⤺</div>

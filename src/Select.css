@@ -46,6 +46,7 @@
     font-size: 4vh;
     font-weight: bolder;
     text-shadow: calc(.75 * var(--shadow-x)) calc(.75 * var(--shadow-y)) var(--shadow-blur) var(--color-shadow);
+    line-height: 1.5;
 }
 
 .Result-button, .Select-tutorial-button {
