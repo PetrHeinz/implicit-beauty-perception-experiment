@@ -10,6 +10,7 @@ export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, 
     const TUTORIAL_TEXT_GOAL = "Podívejte se na fotografie vpravo a rozhodněte, která z fotografií Vám připadá více atraktivní. Na celé rozhodnutí máte " + timeoutSeconds + " vteřin.";
     const TUTORIAL_TEXT_SELECTION = "Nyní se na obrazovce objevila 2 tlačítka 'Vybrat'. Klikněte na to u Vámi zvolené fotografie. Výběr poté potvrdíte kliknutím na samotnou fotografii.";
 
+    const [emailFilled, setEmailFilled] = useState(false);
     const [selected, setSelected] = useState(null);
     const [isSelectable, setSelectable] = useState(false);
     const [isConfirmed, setConfirmed] = useState(false);
@@ -66,6 +67,16 @@ export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, 
 
     const getPhoto = name => "./photos/T0" + name + ".jpg";
 
+    const saveEmail = () => {
+        const emailInput = document.querySelector(".Result-input");
+        if (!emailInput.value.match(/@/)) {
+            return emailInput.focus()
+        }
+
+        setEmailFilled(true)
+        logger.logInfo("E-mail: " + emailInput.value);
+    };
+
     const restartTutorial = () => {
         logger.logDebug("Restarting tutorial");
 
@@ -118,8 +129,9 @@ export default function Tutorial({seed, selectableDelaySeconds, timeoutSeconds, 
                    onTimeout={() => setShowingResult(true)}
                    logger={logger}
             />
+            {!emailFilled && <div className="Select-tutorial">Zadejte prosím svůj e-mail<input className="Result-input" type="email" /><button className="Select-tutorial-button" onClick={saveEmail}>Pokračovat</button></div>}
             {selected !== null && <div className={"Select-flash Choice-" + selected}/>}
-            {tutorialText !== null && <div className="Select-tutorial">{tutorialText}<button className="Select-tutorial-button" onClick={closeTutorial}>Rozumím</button></div>}
+            {tutorialText !== null && emailFilled && <div className="Select-tutorial">{tutorialText}<button className="Select-tutorial-button" onClick={closeTutorial}>Rozumím</button></div>}
         </div>
     );
 }
